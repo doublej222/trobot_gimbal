@@ -51,6 +51,7 @@ const float g = 9.80665f;
 #define BMI088_TEMP_FACTOR 0.125f
 #define BMI088_TEMP_OFFSET 23.0f
 
+static uint8_t tx_buf[10];
 static uint8_t rx_buf[10];
 
 static bsp_status_t write_reg(uint8_t addr, uint8_t val) {
@@ -61,11 +62,11 @@ static bsp_status_t write_reg(uint8_t addr, uint8_t val) {
 }
 
 static bsp_status_t read_reg(uint8_t addr, size_t len) {
-    addr |= 0x80;
-    bsp_status_t status = bsp_spi_send(&SPI_PORT, &addr, 1);
-    if (status == BSP_STATUS_OK) status = bsp_spi_recv(&SPI_PORT, rx_buf, len);
-    bsp_time_delay_us(50);
-    return status;
+    const size_t frame_len = len + 1;
+    if (frame_len > sizeof tx_buf) return BSP_STATUS_ERROR;
+
+    tx_buf[0] = addr | 0x80;
+    return bsp_spi_send_recv(&SPI_PORT, tx_buf, rx_buf, (uint16_t) frame_len);
 }
 
 static bsp_status_t accel_write(uint8_t addr, uint8_t val) {
@@ -85,7 +86,7 @@ static bsp_status_t gyro_write(uint8_t addr, uint8_t val) {
 static bsp_status_t accel_read(uint8_t addr, uint8_t *buf, uint8_t len) {
     ACCEL_CS_LOW();
     const bsp_status_t status = read_reg(addr, len + 1);
-    if (status == BSP_STATUS_OK) memcpy(buf, rx_buf + 1, len);
+    if (status == BSP_STATUS_OK) memcpy(buf, rx_buf + 2, len);
     ACCEL_CS_HIGH();
     return status;
 }
@@ -93,7 +94,7 @@ static bsp_status_t accel_read(uint8_t addr, uint8_t *buf, uint8_t len) {
 static bsp_status_t gyro_read(uint8_t addr, uint8_t *buf, uint8_t len) {
     GYRO_CS_LOW();
     const bsp_status_t status = read_reg(addr, len);
-    if (status == BSP_STATUS_OK) memcpy(buf, rx_buf, len);
+    if (status == BSP_STATUS_OK) memcpy(buf, rx_buf + 1, len);
     GYRO_CS_HIGH();
     return status;
 }
