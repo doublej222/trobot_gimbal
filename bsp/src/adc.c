@@ -18,3 +18,7 @@ bsp_status_t bsp_adc_init(void) {
 float bsp_adc_vbus(void) {
     return (float) val[0] * 3.3f / 65535 * 11.0f;
 }
+
+uint16_t bsp_adc_lcd_key_raw(void) {
+    return val[1];
+}

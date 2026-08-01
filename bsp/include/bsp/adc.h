@@ -22,6 +22,12 @@ bsp_status_t bsp_adc_init(void);
  */
 float bsp_adc_vbus(void);
 
+/**
+ * 获取 LCD 五向按键 ADC 原始值
+ * @return 16 位 ADC 原始值
+ */
+uint16_t bsp_adc_lcd_key_raw(void);
+
 #ifdef __cplusplus
 }
 #endif
