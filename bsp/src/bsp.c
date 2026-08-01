@@ -52,7 +52,6 @@ uint32_t bsp_hw_init() {
     if (bsp_can_init(E_CAN_3) != BSP_STATUS_OK) failed |= BSP_HW_CAN_3;
     if (bsp_imu_init() != BSP_STATUS_OK) failed |= BSP_HW_IMU;
     if (bsp_adc_init() != BSP_STATUS_OK) failed |= BSP_HW_ADC;
-    if (bsp_lcd_init() != BSP_STATUS_OK) failed |= BSP_HW_LCD;
     if (!bsp_flash_init()) failed |= BSP_HW_FLASH;
     if (bsp_buzzer_init() != BSP_STATUS_OK) failed |= BSP_HW_BUZZER;
     return failed;
