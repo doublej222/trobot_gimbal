@@ -14,7 +14,7 @@
 #include "utils/logger.h"
 #include "utils/os.h"
 #include "utils/terminal.h"
-extern void example_task(void *args);
+extern void test_task(void *args);
 
 static constexpr music::tone_t ready_tone[] {
     { 4500, 75 },
@@ -54,7 +54,7 @@ extern "C" [[noreturn]] void app_entrance(void *args) {
 
     // Init Application Tasks
     BSP_ASSERT(os::task::static_create(
-        example_task, nullptr, "example_task", 512, os::task::Priority::HIGH
+        test_task, nullptr, "example_task", 512, os::task::Priority::HIGH
     ));
 
     for (;;) {
