@@ -15,6 +15,7 @@
 #include "utils/os.h"
 #include "utils/terminal.h"
 extern void test_task(void *args);
+extern void gimbal_task(void *args);
 
 static constexpr music::tone_t ready_tone[] {
     { 4500, 75 },
@@ -34,7 +35,7 @@ extern "C" [[noreturn]] void app_entrance(void *args) {
     music::init();
     // logger::init(E_UART_1, logger::INFO);
     // terminal::init(E_UART_1);
-    // rc::dr16::init(E_UART_5);
+    rc::dr16::init(E_UART_5);
     // rc::ht10::init(E_UART_5);
 
     if ((hw_failed & BSP_HW_IMU) != 0) {
@@ -53,8 +54,11 @@ extern "C" [[noreturn]] void app_entrance(void *args) {
     music::play_blocking(ready_tone);
 
     // Init Application Tasks
+    // BSP_ASSERT(os::task::static_create(
+    //     test_task, nullptr, "example_task", 512, os::task::Priority::HIGH
+    // ));
     BSP_ASSERT(os::task::static_create(
-        test_task, nullptr, "example_task", 512, os::task::Priority::HIGH
+        gimbal_task, nullptr, "gimbal_task", 512, os::task::Priority::HIGH
     ));
 
     for (;;) {
