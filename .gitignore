@@ -1,16 +1,16 @@
-.idea
-.sysview
-.mxproject
-build
-cmake
-Core
-Drivers
-Middlewares
-USB_DEVICE
-!bsp/usb_device
-CMakePresets.json
-startup_stm32h723xx.s
-SystemView.SVPrj
+# .idea
+# .sysview
+# .mxproject
+# build
+# cmake
+# Core
+# Drivers
+# Middlewares
+# USB_DEVICE
+# !bsp/usb_device
+# CMakePresets.json
+# startup_stm32h723xx.s
+# SystemView.SVPrj
 
-components/*
-!components/CMakeLists.txt
+# components/*
+# !components/CMakeLists.txt

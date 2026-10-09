@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/components/cmsis-dsp" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/components/controller" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/components/ins" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/components/math" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/components/motor" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/components/music" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/components/rc" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/components/utils" vcs="Git" />
+  </component>
+</project>
