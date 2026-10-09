@@ -15,6 +15,7 @@ float smc::smc_update(float angle_target, float angle_now, float angle_vel)
 
 	if (fabs(error) < error_eps)
 	{
+		output = 0;
 		return 0;
 	}
 
